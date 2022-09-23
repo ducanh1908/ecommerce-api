@@ -1,6 +1,5 @@
 const bodyParser = require('body-parser');
 const express = require('express')
-
 const mongoose = require('mongoose')
 require('dotenv').config()
 const router = require('./routes/router')
@@ -16,7 +15,6 @@ mongoose.connect(DB).then(()=> {
     console.log(e)
 })
 app.use(express.json());
-app.use(bodyParser.json())
 app.use('/api',router)
 
 app.listen(process.env.PORT || 5000, ()=>{

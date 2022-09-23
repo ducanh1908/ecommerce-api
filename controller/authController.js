@@ -1,6 +1,8 @@
 const User = require('../model/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+
+
 const authController = {
    register : async (req, res) => {
         const user = req.body
@@ -38,7 +40,10 @@ const authController = {
                     const access_token = jwt.sign({
                         id: user._id
                     },process.env.JWT,{expiresIn:"3d"})
+
                     const {password, ...others} = user._doc
+
+
                     res.status(200).json({...others, access_token})
                 }
             }
