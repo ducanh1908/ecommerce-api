@@ -1,6 +1,6 @@
 const userController = {
-    getAll : (req, res) => {
-        console.log('get all user')
+    getAll : () => {
+       console.log('asdfasdfasdf')
     }
 
 

@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express')
 
 const mongoose = require('mongoose')
@@ -14,7 +15,9 @@ mongoose.connect(DB).then(()=> {
 .catch((e)=>{
     console.log(e)
 })
-app.get('/api',router)
+app.use(express.json());
+app.use(bodyParser.json())
+app.use('/api',router)
 
 app.listen(process.env.PORT || 5000, ()=>{
     console.log("Server is running port", process.env.PORT)
