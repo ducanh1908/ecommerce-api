@@ -14,7 +14,7 @@ const verifyToken = async (req, res, next) => {
       }
     });
   } else {
-    return res.status(401).json("You are not authenticated!");
+    return res.status(401).json("You  are not authenticated!");
   }
 };
 
@@ -33,7 +33,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
     if (req.user.isAdmin) {
       next();
     } else {
-      res.status(403).json("1 You are not alowed to do that!");
+      res.status(403).json("You are not alowed to do that!");
     }
   });
 };
