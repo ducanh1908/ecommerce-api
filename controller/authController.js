@@ -7,19 +7,33 @@ const authController = {
    register : async (req, res) => {
         const user = req.body
     const hashPassword = await bcrypt.hash(user.password, 10)
+const registerUsername = await User.findOne({username: user.username})
 
-    const newUser = new User({
-        username: user.username,
-        email: user.email,
-        password: hashPassword
-    })
-    try {
-         await newUser.save();
-        res.status(200).json(newUser)
+    if(registerUsername) {
+        res.status(400).json({
+            message: 'Username đã tồn tại !'
+        })
     }
-    catch(err){
-        res.status(500).json(err)
+    else {
+        const registerEmail = await User.findOne({email : user.email}) 
+        if(registerEmail) {
+          return res.status(400).json({
+            message : 'Email đã tồn tại'})
+        }
+          const newUser = new User({
+              username: user.username,
+              email: user.email,
+              password: hashPassword
+          })
+          try {
+            await newUser.save();
+           res.status(200).json(newUser)
+       }
+       catch(err){
+           res.status(500).json(err)
+       }
     }
+  
    
    },
 

@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const User = require("../model/user");
 const userController = {
   updateUser: async (req, res) => {
-    console.log(req.body.password);
 
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 10);
